@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema(
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/, 'Please fill a valid email address'],
     },
     password: { type: String, required: true, minlength: 8 },
+    eula: {type: Boolean, required: true},
     city: { type: String, required: true, maxlength: 20 },
     zipCode: { type: String, required: true, minlength: 5, maxlength: 5 },
     avatar: { type: String, default: 'IMAGEN POR DEFECTO' }, // FALTA POR METER LA IMAGEN POR DEFECTO
