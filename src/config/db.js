@@ -1,15 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 // const DB_URL = process.env.DB_URL;
 
-
 const uri =
-  "mongodb+srv://samikhalaf94@gmail.com:RosendoChas#@lucky-cluster.zjrqk.mongodb.net/lucky-cluster?retryWrites=true&w=majority";
+  'mongodb+srv://samikhalaf94@gmail.com:RosendoChas#@lucky-cluster.zjrqk.mongodb.net/lucky-cluster?retryWrites=true&w=majority';
 mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => {
-    console.log("MongoDB Connected…");
+    console.log('MongoDB Connected…');
   })
-  .catch((err) => console.log(err));
-
-  
+  .catch((error) => console.log(`Error connecting to DB ${error.message}`));

@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const users = [
+const users = [ // CUTRERIO
     {
         name: "judit",
         species: "persona",
@@ -23,6 +23,12 @@ const users = [
 router.get('/', (req, res) => {
           res.status(200).send(users);
  });
+
+ router.post('/', (req, res) => {
+    console.log('Body', req.body);
+    users.push(req.body); //CUTRADA SUPREME
+    res.sendStatus(200);
+})
  
 
 module.exports = router;
