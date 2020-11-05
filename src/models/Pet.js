@@ -1,0 +1,75 @@
+const mongoose = require('mongoose');
+
+const petSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      minlegth: 2,
+      maxlength: 20,
+    },
+    specie: {
+      type: String,
+      enum: [
+        'perro',
+        'gato',
+        'cobaya',
+        'conejo',
+        'pez',
+        'ave',
+        'reptil',
+        'mamífero pequeño',
+        'insectos',
+        'hurón',
+        'anfibio',
+      ],
+    },
+    race: { type: String, required: true },
+    image: { type: Array, required: true },
+    age: { type: String, enum: ['cría', 'joven', 'adulto', 'anciano'] },
+    birthdate: { type: Date },
+    sex: { type: String, enum: ['macho', 'hembra'], required: true },
+    size: {
+      type: String,
+      enum: ['pequeño', 'mediano', 'grande'],
+      required: true,
+    },
+    weight: { type: Number },
+    history: { type: String, minlength: 30, maxlength: 280 },
+    personality: {
+      type: String,
+      enum: [
+        'juguetón',
+        'timido',
+        'cariñoso',
+        'miedoso',
+        'inquieto',
+        'tranquilo',
+        'familiar',
+        'sociable con otros animales',
+      ],
+    },
+    vaccined: { type: Boolean, required: true },
+    dewormed: { type: Boolean, required: true },
+    healthy: { type: Boolean, required: true },
+    sterilized: { type: Boolean, required: true },
+    identified: { type: Boolean, required: true },
+    microchip: { type: Boolean },
+    comments: { type: String, maxlength: 140 },
+    requeriments: { type: String },
+    fee: { type: Number },
+    delivery: { type: String, required: true },
+    association: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //PREGUNTAR
+  },
+  {
+    timestamps: true,
+  },
+);
+
+const Pet = mongoose.model('Pet', petSchema);
+
+module.exports = Pet;
+
+// POPULATE PARA METERLO EN EL GET DE LA PETICION
+// Pet.findById(_id).populate("association")
+//    .then loqueseaya;

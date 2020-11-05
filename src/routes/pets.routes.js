@@ -1,4 +1,5 @@
 const express = require('express');
+const Pet = require('../models/Pet');
 
 const router = express.Router();
 
@@ -28,7 +29,16 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     console.log('Body', req.body);
     pets.push(req.body) // CUTRADA SUPREME
-    res.sendStatus(200);
+
+    // const newPet = new Pet({ name: req.body.name });
+    // newPet.save()
+    // .then(() => {
+
+    //     res.sendStatus(201); // 201 es que ok y creado
+    // })
+    // .catch( (error) => {
+    //     console.log(error.message)
+    // });
 })
  
 
