@@ -21,7 +21,7 @@ const userSchema =  new mongoose.Schema(
     password: { type: String, required: true, minlength: 8 },
     city: { type: String, required: true, maxlength: 20 },
     zipCode: { type: String,required: true, minlength: 5, maxlength: 5 },
-    avatar: { type: String },
+    avatar: { type: String, default: "IMAGEN POR DEFECTO" },
     entry: { dateAdded: new Date() },
     
     address: { type: String, minlength: 5},

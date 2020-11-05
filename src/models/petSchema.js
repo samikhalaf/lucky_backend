@@ -60,7 +60,7 @@ const petSchema = new mongoose.Schema(
     fee: { type: String },
     envío: { type: String, required: true },
     entry: { dateAdded: new Date() },
-    association: { type: Schema.ObjectId, ref: "User" }, //PREGUNTAR
+    association: { type: mongoose.Schema.Type.ObjectId, ref: "User" }, //PREGUNTAR
   },
   {
     timestamps: true,
