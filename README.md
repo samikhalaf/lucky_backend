@@ -10,7 +10,7 @@ Este back usa un clúster de Mongo Atlas para alojar su base de datos. Esto sign
 
 - Instalar la extensión `Mongo DB for VS Code` (tiene unas 57K descargas).
 - Ir a la pestaña nueva en el menú de la izquierda (es una hojita).
-- Darle a `Connect`. Te pedirá una 'connection string', hay que escribir esto:
+- Darle a `Connect with a connection string` (debajo del titulo). Ponemos esto:
 
 `mongodb+srv://lucky_app:RosendoChas1234@lucky-cluster.zjrqk.mongodb.net/luckydb?retryWrites=true&w=majority`
 

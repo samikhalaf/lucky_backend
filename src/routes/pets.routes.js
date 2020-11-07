@@ -150,4 +150,19 @@ router.put('/id', (req, res) => {
   );
 });
 
+//////////// DELETE PARA BORRAR MASCOTAS /////////////////////////////
+
+router.delete('/:id', (req, res) => {
+  const id = req.params.id;
+
+  Pet.findByIdAndDelete(id)
+    .then(() => {
+      return res.send('Mascota borrada con éxito');
+    })
+    .catch((error) => {
+      console.log(error.message);
+      return res.status(500).send('No se ha podido borrar la mascota');
+    });
+});
+
 module.exports = router;
