@@ -3,6 +3,8 @@ require ('./config/db');
 
 const apiRoutes = require('./routes/index.routes');
 
+
+
 const server = express();
 
 // MIDDLEWARE DE EXPRESS, ES LO QUE HAY COMPAY

@@ -18,8 +18,8 @@ const adoptSchema = new mongoose.Schema(
             match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/, 'Please fill a valid email address'],
           },
           phone: {
-              type: Number, 
-              required: true, 
+              type: Number,
+              required: true,
               minlength: 9
           },
           dni: { type: String, minlength: 9, maxlength: 9},
@@ -34,21 +34,16 @@ const adoptSchema = new mongoose.Schema(
           petNeeds: { type: String, minlength: 6, required: true, maxlength: 280 }, // Conoces las necesidades del animal?
           petExpenses: { type: String, minlength: 6, required: true, maxlength: 280 }, // conoces sus gastos?
           petFeeding: { type: String, minlength: 6, required: true, maxlength: 280 }, // conoces su alimentacion?
-          homeType: { type: String, enum: ['piso', 'chalet', 'duplex', 'finca'] }, 
-          rentHome: { type: Boolean}, // estas alquilado? 
+          homeType: { type: String, enum: ['piso', 'chalet', 'duplex', 'finca'] },
+          rentHome: { type: Boolean}, // estas alquilado?
           landlordOK: {type: Boolean}, // tu casero esta de acuerdo?
           garden: {type: Boolean, required: true }, // tienes jardin?
           movingSoon: { type: Boolean, required: true }, // pretendes mudarte pronto?
           flatmates: { type: Boolean, required: true }, // vives con otras personas?
           flatmatesOK: { type: Boolean, required: true }, // estan todos de acuerdo con la adopcion?
           visit: { type: Boolean }, // Estas de acuerdo con que visitemos tu casa?
-          adoptionStatus: {type: String, enum: ['adjudicada', 'pendiente', 'denegada']}
-    },
-    {
-        timestamps: true,
-    },
-);
+          adoptionStatus: {type: String, enum: ['adjudicada', 'pendiente', 'denegada']},
+          date: { type: Date, default: Date.now }
+    });
 
-const Adopt = mongoose.model('Adopt', adoptSchema);
-
-module.exports = Adopt;
+module.exports = mongoose.model('Adopt', adoptSchema);

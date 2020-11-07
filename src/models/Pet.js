@@ -47,28 +47,25 @@ const petSchema = new mongoose.Schema(
         'tranquilo',
         'familiar',
         'sociable con otros animales',
+        'callado',
+        'ruidoso'
       ],
     },
-    vaccined: { type: Boolean, required: true },
-    dewormed: { type: Boolean, required: true },
-    healthy: { type: Boolean, required: true },
-    sterilized: { type: Boolean, required: true },
-    identified: { type: Boolean, required: true },
-    microchip: { type: Boolean },
+    vaccined: { type: Boolean, required: [true, false] },
+    dewormed: { type: Boolean, required: [true, false] },
+    healthy: { type: Boolean, required: [true, false] },
+    sterilized: { type: Boolean, required: [true, false] },
+    identified: { type: Boolean, required: [true, false] },
+    microchip: { type: Boolean, required: [true, false] },
     comments: { type: String, maxlength: 140 },
     requeriments: { type: String },
     fee: { type: Number },
-    delivery: { type: String, required: true },
-    association: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }, //PREGUNTAR
-  },
-  {
-    timestamps: true,
-  },
-);
+    delivery: { type: String, required: [true, false] },
+    association: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+    date: { type: Date, default: Date.now }
+  });
 
-const Pet = mongoose.model('Pet', petSchema);
-
-module.exports = Pet;
+module.exports = mongoose.model('Pet', petSchema);
 
 // POPULATE PARA METERLO EN EL GET DE LA PETICION
 // Pet.findById(_id).populate("association")
