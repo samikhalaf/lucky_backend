@@ -23,6 +23,7 @@ const petSchema = new mongoose.Schema(
         'hurón',
         'anfibio',
       ],
+      required: true,
     },
     race: { type: String, required: true },
     image: { type: Array, required: true },
@@ -48,7 +49,7 @@ const petSchema = new mongoose.Schema(
         'familiar',
         'sociable con otros animales',
         'callado',
-        'ruidoso'
+        'ruidoso',
       ],
     },
     vaccined: { type: Boolean, required: [true, false] },
@@ -62,8 +63,11 @@ const petSchema = new mongoose.Schema(
     fee: { type: Number },
     delivery: { type: String, required: [true, false] },
     association: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    date: { type: Date, default: Date.now }
-  });
+  },
+  {
+    timestamps: true,
+  },
+);
 
 module.exports = mongoose.model('Pet', petSchema);
 

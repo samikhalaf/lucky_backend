@@ -2,6 +2,20 @@
 
 Esta es la API de la app Lucky.
 
+## Mongo Atlas
+
+Este back usa un clúster de Mongo Atlas para alojar su base de datos. Esto significa que tiene la base de datos está en el Cloud.
+
+### Para visualizar los datos del Mongo Atlas desde el VS Code:
+
+- Instalar la extensión `Mongo DB for VS Code` (tiene unas 57K descargas).
+- Ir a la pestaña nueva en el menú de la izquierda (es una hojita).
+- Darle a `Connect`. Te pedirá una 'connection string', hay que escribir esto:
+
+`mongodb+srv://lucky_app:RosendoChas1234@lucky-cluster.zjrqk.mongodb.net/luckydb?retryWrites=true&w=majority`
+
+- Slava! Ya tenemos full access a nuestro clúster sin salir del VS Code.
+
 ## RUTAS
 
 ### GET
@@ -20,7 +34,6 @@ Esta es la API de la app Lucky.
 
 ### PUT
 
+/pets/:id → Actualiza una entrada
 
-
-
-### DELETE 
+### DELETE

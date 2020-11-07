@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema(
 
     role: { type: String, enum: ['basic', 'association'], required: true },
     date: { type: Date, default: Date.now }
+  },
+  {
+    timestamps: true,
   });
 
 module.exports = mongoose.model('User', userSchema);
