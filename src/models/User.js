@@ -27,7 +27,9 @@ const userSchema = new mongoose.Schema(
     contactPhone: { type: String, minlength: 9 },
 
     role: { type: String, enum: ['basic', 'association'], required: true },
-    date: { type: Date, default: Date.now }
+  },
+  {
+    timestamps: true,
   });
 
 module.exports = mongoose.model('User', userSchema);

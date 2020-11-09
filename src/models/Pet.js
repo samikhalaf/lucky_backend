@@ -23,6 +23,7 @@ const petSchema = new mongoose.Schema(
         'hurón',
         'anfibio',
       ],
+      required: true,
     },
     race: { type: String, required: true },
     image: { type: Array, required: true },
@@ -36,21 +37,21 @@ const petSchema = new mongoose.Schema(
     },
     weight: { type: Number },
     history: { type: String, minlength: 30, maxlength: 280 },
-    personality: {
-      type: String,
-      enum: [
-        'juguetón',
-        'timido',
-        'cariñoso',
-        'miedoso',
-        'inquieto',
-        'tranquilo',
-        'familiar',
-        'sociable con otros animales',
-        'callado',
-        'ruidoso'
-      ],
-    },
+    // personality: {
+    //   type: String,
+    //   enum: [
+    //     'juguetón',
+    //     'timido',
+    //     'cariñoso',
+    //     'miedoso',
+    //     'inquieto',
+    //     'tranquilo',
+    //     'familiar',
+    //     'sociable con otros animales',
+    //     'callado',
+    //     'ruidoso',
+    //   ],
+    // },
     vaccined: { type: Boolean, required: [true, false] },
     dewormed: { type: Boolean, required: [true, false] },
     healthy: { type: Boolean, required: [true, false] },
@@ -62,8 +63,11 @@ const petSchema = new mongoose.Schema(
     fee: { type: Number },
     delivery: { type: String, required: [true, false] },
     association: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-    date: { type: Date, default: Date.now }
-  });
+  },
+  {
+    timestamps: true,
+  },
+);
 
 module.exports = mongoose.model('Pet', petSchema);
 

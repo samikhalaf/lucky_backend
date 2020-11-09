@@ -44,6 +44,10 @@ const adoptSchema = new mongoose.Schema(
           visit: { type: Boolean }, // Estas de acuerdo con que visitemos tu casa?
           adoptionStatus: {type: String, enum: ['adjudicada', 'pendiente', 'denegada']},
           date: { type: Date, default: Date.now }
-    });
+    },
+    {
+      timestamps: true,
+    }
+    );
 
 module.exports = mongoose.model('Adopt', adoptSchema);

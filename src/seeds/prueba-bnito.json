@@ -1,0 +1,55 @@
+{
+  "name": "bnito",
+  "specie": "gato",
+  "race": "común europeo",
+  "image": [
+    "https://mascotas-static.hola.com/elminizoo/files/2014/04/20140121_001208.jpg",
+    "https://pbs.twimg.com/media/BgIjHgfIQAARUZE.jpg",
+    "https://i.pinimg.com/736x/0b/3b/1b/0b3b1b5c9c1df53afbad73ccf90604d7.jpg"
+  ],
+  "age": "joven",
+  "sex": "macho",
+  "size": "mediano",
+  "weight": 4,
+  "history": "Recogido de una protectora de Alcorcón, originalmente se llamaba Kiwi. Ahora vive con Sami",
+  "vaccined": true,
+  "dewormed": true,
+  "healthy": true,
+  "sterilized": true,
+  "identified": true,
+  "microchip": false,
+  "comments": "Es un gato tranquilo y cariñoso. Solo maulla cuando le falta algo. Le gusta subirse a las personas y olerles el pelo",
+  "requeriments": "",
+  "fee": 0,
+  "delivery": false
+}
+
+
+
+
+{
+  "name": "Marcelino",
+  "specie": "gato",
+  "race": "persa",
+  "image": [
+    "https://mascotas-static.hola.com/elminizoo/files/2014/04/20140121_001208.jpg",
+    "https://pbs.twimg.com/media/BgIjHgfIQAARUZE.jpg",
+    "https://i.pinimg.com/736x/0b/3b/1b/0b3b1b5c9c1df53afbad73ccf90604d7.jpg"
+  ],
+  "age": "adulto",
+  "sex": "macho",
+  "size": "grande",
+  "weight": 6,
+  "history": "Encontrado en una gasolinera de Torrelodones",
+  "personality": ["juguetón", "ruidoso"],
+  "vaccined": false,
+  "dewormed": false,
+  "healthy": false,
+  "sterilized": false,
+  "identified": true,
+  "microchip": false,
+  "comments": "Es un gato más bien cabrón, hay que tener cuidado",
+  "requeriments": "No tiene vejiga, hay que estrujarlo para que haga pis",
+  "fee": 0,
+  "delivery": false
+}

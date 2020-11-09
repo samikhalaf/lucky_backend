@@ -9,7 +9,7 @@ const server = express();
 
 // MIDDLEWARE DE EXPRESS, ES LO QUE HAY COMPAY
 server.use(express.urlencoded({ extended: false}))
-// MIDDLEWARE PARA PARSEAR EL BODY EN JSON
+// Este parsea el body en json
 server.use(express.json());
 
 server.use(apiRoutes) // MIDDLEWARE
