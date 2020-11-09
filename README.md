@@ -34,7 +34,7 @@ Este back usa un clúster de Mongo Atlas para alojar su base de datos. Esto sign
 
 `GET` → devuelve todos los bichos en json, si pones `/:id` te devuelve uno solo ✅
 
-`POST` → mete un user en la BBDD ✅ problemas al validar emails raros ❗
+`POST` → mete un user en la BBDD ✅
 
 `PUT` → no funciona, hay problemas que resolver ❌
 
