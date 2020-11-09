@@ -53,3 +53,26 @@
   "fee": 0,
   "delivery": false
 }
+
+{
+  "name": "Eufrasio",
+  "specie": "reptil",
+  "race": "lagarto",
+  "image": [],
+  "age": "anciano",
+  "sex": "macho",
+  "size": "pequeño",
+  "weight": 1,
+  "history": "Aquiestamos probando amiggoooo",
+  "personality": ["sociable con otros animales"],
+  "vaccined": true,
+  "dewormed": false,
+  "healthy": true,
+  "sterilized": false,
+  "identified": true,
+  "microchip": false,
+  "comments": "",
+  "requeriments": "",
+  "fee": 0,
+  "delivery": false
+}

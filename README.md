@@ -18,22 +18,34 @@ Este back usa un clúster de Mongo Atlas para alojar su base de datos. Esto sign
 
 ## RUTAS
 
-### GET
-
 `/` → el server te saluda
 
-`/users` → devuelve todos los usuarios en json
+### /pets
 
-`/pets` → devuelve todos los bichos en json
+`GET` → devuelve todos los bichos en json, si pones `/:id` te devuelve uno solo ✅
 
-### POST
+`POST` → funciona bien pero saltan errores que no existen ❗
 
-`/users` → Introduce una nueva entrada de usuarios
+`PUT` → no funciona aun ❌
 
-`/pets` → Introduce una nueva entrada de animalicos
+`DELETE` → con `/:id` funciona perfecto ✅
 
-### PUT
+### /users
 
-/pets/:id → Actualiza una entrada
+`GET` → devuelve todos los bichos en json, si pones `/:id` te devuelve uno solo ✅
 
-### DELETE
+`POST` → mete un user en la BBDD ✅ problemas al validar emails raros ❗
+
+`PUT` → no funciona, hay problemas que resolver ❌
+
+`DELETE` → con `/:id` funciona perfecto ✅
+
+### /adopts
+
+`GET` → no existe aun ❌
+
+`POST` → no existe aun ❌
+
+`PUT` → no existe aun ❌
+
+`DELETE` → no existe aun ❌

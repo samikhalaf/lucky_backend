@@ -1,34 +1,35 @@
 const express = require('express');
-const User = require('../models/User');
+const Adopt = require('../models/Adopt')
 const router = express.Router();
 
-//////////// GET PARA VER USUARIOS /////////////////////////////
+
+//////////// GET PARA VER USUARIOS \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 router.get('/', (req, res) => {
-  User.find({})
-    .then((user) => {
-      return res.json(user);
+  Adopt.find({})
+    .then((adopt) => {
+      return res.json(adopt);
     })
     .catch((err) => {
       return res.status(500).json(err);
     });
 });
 
-//////////// GET PARA VER USUARIO (POR ID) /////////////////////////////
+//////////// GET PARA VER USUARIO (POR ID) \\\\\\\\\\\\\\\\\\
 
 router.get('/:id', (req, res) => {
   const id = req.params.id;
 
-  User.findById(id)
-    .then((user) => {
-      return res.json(user);
+  Adopt.findById(id)
+    .then((adopt) => {
+      return res.json(adopt);
     })
     .catch((err) => {
       return res.status(500).json(err);
     });
 });
 
-//////////// POST PARA AÑADIR USUARIOS /////////////////////////////
+//////////// POST PARA AÑADIR USUARIOS \\\\\\\\\\\\\\\\\\\\\\
 
 router.post('/', (req, res) => {
   // Comprobación de que los campos requeridos están en la petición
@@ -47,7 +48,7 @@ router.post('/', (req, res) => {
       .send('Te faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
   }
 
-  const user = new User();
+  const adppt = new Adopt();
 
   // Recogemos del body sus propiedades
   // Se podria hacer con un map pero paso de añadir complejidad
@@ -65,26 +66,26 @@ router.post('/', (req, res) => {
 
   // Aquí guardamos el usuario
 
-  user
+  adopt
     .save()
-    .then((storedUser) => {
+    .then((storedAdopt) => {
       console.log('Guardado correctamente.');
-      console.log(storedUser);
+      console.log(storedAdopt);
       res.sendStatus(200);
     })
     .catch((error) => {
-      console.log('Error al guardar el usuario: ');
+      console.log('Error al guardar formulario de adopción: ');
       console.log(error.message);
     });
 });
 
-//////////// PUT PARA ACTUALIZAR USUARIOS /////////////////////////////
+//////////// PUT PARA ACTUALIZAR USUARIOS \\\\\\\\\\\\\\\\\\\\
 
-router.put('/:id', (req, res) => {
+router.put('/id', (req, res) => {
   const id = req.params.id;
 
-  const updateUser = {
-    username: req.body.username,
+  const updateAdopt = {
+    adoptname: req.body.adoptname,
     email: req.body.email,
     password: req.body.password,
     eula: req.body.eula,
@@ -93,32 +94,32 @@ router.put('/:id', (req, res) => {
     role: req.body.role,
   };
 
-  User.findByIdAndUpdate(
+  Adopt.findByIdAndUpdate(
     id,
-    updateUser
-      .then((preStoredUser) => {
-        console.log(preStoredUser);
+    updateAdopt
+      .then((preStoredAdopt) => {
+        console.log(preStoredAdopt);
         res.status(201).send('Todo actualizado correctamente.');
       })
       .catch((error) => {
         console.log(error.message);
-        res.status(500).send('Error al actualizar la mascota.');
+        res.status(500).send('Error al actualizar el formulario de adopción.');
       }),
   );
 });
 
-//////////// DELETE PARA BORRAR USUARIOS /////////////////////////////
+//////////// DELETE PARA BORRAR USUARIOS \\\\\\\\\\\\\\\\\\\\\
 
 router.delete('/:id', (req, res) => {
   const id = req.params.id;
 
-  User.findByIdAndDelete(id)
+  Adopt.findByIdAndDelete(id)
     .then(() => {
-      return res.send('Usuario borrado con éxito');
+      return res.send('Formulario de adopción borrado con éxito');
     })
     .catch((error) => {
       console.log(error.message);
-      return res.status(500).send('No se ha podido borrar el usuario');
+      return res.status(500).send('No se ha podido formulario de adopción');
     });
 });
 
