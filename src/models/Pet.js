@@ -19,7 +19,7 @@ const petSchema = new mongoose.Schema(
         'ave',
         'reptil',
         'mamífero pequeño',
-        'insectos',
+        'insecto',
         'hurón',
         'anfibio',
       ],
@@ -38,7 +38,7 @@ const petSchema = new mongoose.Schema(
     weight: { type: Number },
     history: { type: String, minlength: 30, maxlength: 280 },
     personality: {
-      type: String,
+      type: [String],
       enum: [
         'juguetón',
         'timido',

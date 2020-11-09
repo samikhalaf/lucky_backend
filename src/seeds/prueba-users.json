@@ -56,3 +56,25 @@
   "avatar": "",
   "role": "basic"
 }
+
+{
+  "username": "Manchita",
+  "email": "manchita-rguez@gmail.com",
+  "password": "tengonombredeanimal",
+  "eula": true,
+  "city": "Venta de Baños",
+  "zipCode": "35666",
+  "avatar": "",
+  "role": "basic"
+}
+
+{
+  "username": "Ernesto",
+  "email": "ernestiko1990@gmail.com",
+  "password": "eeeeeeeeee2313",
+  "eula": true,
+  "city": "Santiago de Compostela",
+  "zipCode": "26545",
+  "avatar": "",
+  "role": "basic"
+}
