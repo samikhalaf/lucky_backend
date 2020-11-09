@@ -1,0 +1,80 @@
+{
+  "username": "su_morenito_69",
+  "email": "eeeee@gmail.cat",
+  "password": "Bimbo12345",
+  "eula": true,
+  "city": "Madrid",
+  "zipCode": "28001",
+  "avatar": "",
+  "role": "basic"
+}
+
+{
+  "username": "lonchilla",
+  "email": "lonchilla.jamon@gmail.com",
+  "password": "jdghsuipfgh665656",
+  "eula": true,
+  "city": "Malagón",
+  "zipCode": "35666",
+  "avatar": "",
+  "role": "basic"
+}
+
+{
+  "username": "Asociación Pezuñas Unidas",
+  "email": "pezunas_unidas@gmail.com",
+  "password": "SlavaStalin1917",
+  "eula": true,
+  "city": "Calatayud",
+  "zipCode": "25878",
+  "avatar": "",
+  "address": "Av Julio Anguita 55",
+  "contactPhone": "645212222",
+  "role": "association"
+}
+
+{
+  "username": "Asociación PROA",
+  "email": "proa-animalicos@gmail.com",
+  "password": "pobresbichos@",
+  "eula": true,
+  "city": "Ovieu",
+  "zipCode": "26542",
+  "avatar": "",
+  "address": "C/ del Sandwich Mixto 12",
+  "contactPhone": "584522254",
+  "role": "association"
+}
+
+{
+  "username": "Alfredo",
+  "email": "alf@redo.com",
+  "password": "fredoal12345",
+  "eula": true,
+  "city": "Tetuan",
+  "zipCode": "28152",
+  "avatar": "",
+  "role": "basic"
+}
+
+{
+  "username": "Manchita",
+  "email": "manchita-rguez@gmail.com",
+  "password": "tengonombredeanimal",
+  "eula": true,
+  "city": "Venta de Baños",
+  "zipCode": "35666",
+  "avatar": "",
+  "role": "basic"
+}
+
+{
+  "username": "Ernesto",
+  "email": "ernestiko1990@gmail.com",
+  "password": "eeeeeeeeee2313",
+  "eula": true,
+  "city": "Santiago de Compostela",
+  "zipCode": "26545",
+  "avatar": "",
+  "role": "basic"
+}

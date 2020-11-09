@@ -3,25 +3,6 @@ const Pet = require('../models/Pet');
 
 const router = express.Router();
 
-const pets = [
-  // CUTRERIO
-  {
-    name: 'Sami',
-    species: 'langosta',
-    legs: 12,
-  },
-  {
-    name: 'Alfredo',
-    species: 'Pulpo',
-    legs: 8,
-  },
-  {
-    name: 'Rosendo',
-    species: 'Rosendo',
-    legs: 1,
-  },
-];
-
 //////////// GET PARA VER MASCOTAS /////////////////////////////
 
 router.get('/', (req, res) => {
@@ -72,7 +53,7 @@ router.post('/', (req, res) => {
       .status(400)
       .send('Te faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
   }
-
+  
   const pet = new Pet();
 
   // Recogemos del body sus propiedades
@@ -118,7 +99,7 @@ router.post('/', (req, res) => {
 
 //////////// PUT PARA ACTUALIZAR MASCOTAS /////////////////////////////
 
-router.put('/id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
 
   const updatePet = {
