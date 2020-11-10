@@ -24,28 +24,28 @@ Este back usa un clúster de Mongo Atlas para alojar su base de datos. Esto sign
 
 `GET` → devuelve todos los bichos en json, si pones `/:id` te devuelve uno solo ✅
 
-`POST` → funciona bien pero saltan errores que no existen ❗
+`POST` → mete un user en la BBDD ✅
 
-`PUT` → no funciona aun ❌
+`PUT` → funciona, pero todos los campos que envies vacios se quedan `null`
 
 `DELETE` → con `/:id` funciona perfecto ✅
 
 ### /users
 
-`GET` → devuelve todos los bichos en json, si pones `/:id` te devuelve uno solo ✅
+`GET` → devuelve todos los usuarios en json, si pones `/:id` te devuelve uno solo ✅
 
 `POST` → mete un user en la BBDD ✅
 
-`PUT` → no funciona, hay problemas que resolver ❌
+`PUT` → funciona, pero todos los campos que envies vacios se quedan `null`
 
 `DELETE` → con `/:id` funciona perfecto ✅
 
 ### /adopts
 
-`GET` → no existe aun ❌
+`GET` → devuelve todos los formularios de adopción en json, si pones `/:id` te devuelve uno solo ✅
 
-`POST` → no existe aun ❌
+`POST` → mete un formulario de adopcion en la BBDD ✅
 
 `PUT` → no existe aun ❌
 
-`DELETE` → no existe aun ❌
+`DELETE` → con `/:id` funciona perfecto ✅
