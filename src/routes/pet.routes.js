@@ -1,6 +1,33 @@
 const express = require('express');
 const Pet = require('../models/Pet');
 
+// Validación de datos antes de escribirse en la DB
+
+const validateData = (req, res, next) => {
+  if (
+    typeof req.body.name === 'undefined' ||
+    typeof req.body.specie === 'undefined' ||
+    typeof req.body.race === 'undefined' ||
+    typeof req.body.image === 'undefined' ||
+    typeof req.body.sex === 'undefined' ||
+    typeof req.body.size === 'undefined' ||
+    typeof req.body.vaccined === 'undefined' ||
+    typeof req.body.dewormed === 'undefined' ||
+    typeof req.body.healthy === 'undefined' ||
+    typeof req.body.sterilized === 'undefined' ||
+    typeof req.body.identified === 'undefined' ||
+    typeof req.body.microchip === 'undefined' ||
+    typeof req.body.delivery === 'undefined'
+  ) {
+    res
+      .status(400)
+      .send('Faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
+    return;
+  }
+
+  next();
+};
+
 const router = express.Router();
 
 //////////// GET PARA VER MASCOTAS /////////////////////////////
@@ -31,56 +58,35 @@ router.get('/:id', (req, res) => {
 
 //////////// POST PARA AÑADIR MASCOTAS /////////////////////////////
 
-router.post('/', (req, res) => {
-  // Comprobación de que los campos requeridos están en la petición
+router.post('/', validateData, (req, res) => {
+  // Asignamos a cada valor su clave
 
-  if (
-    !req.body.name ||
-    !req.body.specie ||
-    !req.body.race ||
-    !req.body.image ||
-    !req.body.sex ||
-    !req.body.size ||
-    !req.body.vaccined ||
-    !req.body.dewormed ||
-    !req.body.healthy ||
-    !req.body.sterilized ||
-    !req.body.identified ||
-    !req.body.microchip ||
-    !req.body.delivery
-  ) {
-    res
-      .status(400)
-      .send('Te faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
-  }
-  
-  const pet = new Pet();
+  const petProps = {
+    name: req.body.name,
+    specie: req.body.specie,
+    race: req.body.race,
+    image: req.body.image,
+    age: req.body.age,
+    birthday: req.body.birthday,
+    sex: req.body.sex,
+    size: req.body.size,
+    weight: req.body.weight,
+    history: req.body.history,
+    personality: req.body.personality,
+    vaccined: req.body.vaccined,
+    dewormed: req.body.dewormed,
+    healthy: req.body.healthy,
+    sterilized: req.body.sterilized,
+    identified: req.body.identified,
+    microchip: req.body.microchip,
+    comments: req.body.comments,
+    requeriments: req.body.requeriments,
+    fee: req.body.fee,
+    delivery: req.body.delivery,
+    association: req.body.association,
+  };
 
-  // Recogemos del body sus propiedades
-  // Se podria hacer con un map pero paso de añadir complejidad
-
-  pet.name = req.body.name;
-  pet.specie = req.body.specie;
-  pet.race = req.body.race;
-  pet.image = req.body.image;
-  pet.age = req.body.age;
-  pet.birthday = req.body.birthday;
-  pet.sex = req.body.sex;
-  pet.size = req.body.size;
-  pet.weight = req.body.weight;
-  pet.history = req.body.history;
-  pet.personality = req.body.personality;
-  pet.vaccined = req.body.vaccined;
-  pet.dewormed = req.body.dewormed;
-  pet.healthy = req.body.healthy;
-  pet.sterilized = req.body.sterilized;
-  pet.identified = req.body.identified;
-  pet.microchip = req.body.microchip;
-  pet.comments = req.body.comments;
-  pet.requeriments = req.body.requeriments;
-  pet.fee = req.body.fee;
-  pet.delivery = req.body.delivery;
-  pet.association = req.body.association;
+  const pet = new Pet(petProps);
 
   // Aquí guardamos la mascota
 
@@ -89,7 +95,7 @@ router.post('/', (req, res) => {
     .then((storedPet) => {
       console.log('Guardado correctamente.');
       console.log(storedPet);
-      res.sendStatus(200);
+      res.sendStatus(201);
     })
     .catch((error) => {
       console.log('ERROR al guardar la mascota: ');
@@ -118,17 +124,15 @@ router.put('/:id', (req, res) => {
     delivery: req.body.delivery,
   };
 
-  Pet.findByIdAndUpdate(
-    id,
-    updatePet
-      .then((preStoredPet) => {
-        res.status(201).send('Todo actualizado correctamente.');
-      })
-      .catch((error) => {
-        console.log(error.message);
-        res.status(500).send('Error al actualizar la mascota.');
-      }),
-  );
+  Pet.findByIdAndUpdate(id, updatePet)
+    .then((preStoredPet) => {
+      console.log(preStoredPet);
+      res.status(200).send('Todo actualizado correctamente.');
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(500).send('Error al actualizar la mascota.');
+    });
 });
 
 //////////// DELETE PARA BORRAR MASCOTAS /////////////////////////////

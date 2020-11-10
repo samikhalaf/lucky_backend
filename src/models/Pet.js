@@ -26,7 +26,7 @@ const petSchema = new mongoose.Schema(
       required: true,
     },
     race: { type: String, required: true },
-    image: { type: Array, required: true },
+    image: { type: String, required: true },
     age: { type: String, enum: ['cría', 'joven', 'adulto', 'anciano'] },
     birthdate: { type: Date },
     sex: { type: String, enum: ['macho', 'hembra'], required: true },
@@ -37,8 +37,8 @@ const petSchema = new mongoose.Schema(
     },
     weight: { type: Number },
     history: { type: String, minlength: 30, maxlength: 280 },
-    personality: {
-      type: [String],
+    personality: [{ 
+      type: String,
       enum: [
         'juguetón',
         'timido',
@@ -51,7 +51,7 @@ const petSchema = new mongoose.Schema(
         'callado',
         'ruidoso',
       ],
-    },
+    }],
     vaccined: { type: Boolean, required: [true, false] },
     dewormed: { type: Boolean, required: [true, false] },
     healthy: { type: Boolean, required: [true, false] },

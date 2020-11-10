@@ -1,5 +1,25 @@
 const express = require('express');
 const User = require('../models/User');
+
+// Validación de datos antes de escribirse en la DB
+
+const validateData = (req, res, next) => {
+  if (
+    typeof req.body.username === 'undefined' ||
+    typeof req.body.email === 'undefined' ||
+    typeof req.body.password === 'undefined' ||
+    typeof req.body.eula === 'undefined' ||
+    typeof req.body.city === 'undefined' ||
+    typeof req.body.zipCode === 'undefined' ||
+    typeof req.body.role === 'undefined'
+  ) {
+    res.status(400).send('Faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
+    return;
+  }
+
+  next();
+};
+
 const router = express.Router();
 
 //////////// GET PARA VER USUARIOS /////////////////////////////
@@ -30,38 +50,25 @@ router.get('/:id', (req, res) => {
 
 //////////// POST PARA AÑADIR USUARIOS /////////////////////////////
 
-router.post('/', (req, res) => {
-  // Comprobación de que los campos requeridos están en la petición
+router.post('/', validateData, (req, res) => {
 
-  if (
-    !req.body.username ||
-    !req.body.email ||
-    !req.body.password ||
-    !req.body.eula ||
-    !req.body.city ||
-    !req.body.zipCode ||
-    !req.body.role
-  ) {
-    res
-      .status(400)
-      .send('Te faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
-  }
+  // Asignamos a cada valor su clave
 
-  const user = new User();
+  const userProps = {
+    username: req.body.username,
+    email: req.body.email,
+    password: req.body.password,
+    eula: req.body.eula,
+    city: req.body.city,
+    zipCode: req.body.zipCode,
+    avatar: req.body.avatar,
+    favorites: req.body.favorites,
+    address: req.body.address,
+    contactPhone: req.body.contactPhone,
+    role: req.body.role,
+  };
 
-  // Recogemos del body sus propiedades
-  // Se podria hacer con un map pero paso de añadir complejidad
-
-  user.username = req.body.username;
-  user.email = req.body.email;
-  user.password = req.body.password;
-  user.eula = req.body.eula;
-  user.city = req.body.city;
-  user.zipCode = req.body.zipCode;
-  user.avatar = req.body.avatar;
-  user.address = req.body.address;
-  user.contactPhone = req.body.contactPhone;
-  user.role = req.body.role;
+  const user = new User(userProps);
 
   // Aquí guardamos el usuario
 
@@ -70,7 +77,7 @@ router.post('/', (req, res) => {
     .then((storedUser) => {
       console.log('Guardado correctamente.');
       console.log(storedUser);
-      res.sendStatus(200);
+      res.sendStatus(201);
     })
     .catch((error) => {
       console.log('Error al guardar el usuario: ');
@@ -93,18 +100,15 @@ router.put('/:id', (req, res) => {
     role: req.body.role,
   };
 
-  User.findByIdAndUpdate(
-    id,
-    updateUser
+  User.findByIdAndUpdate(id, updateUser)
       .then((preStoredUser) => {
         console.log(preStoredUser);
-        res.status(201).send('Todo actualizado correctamente.');
+        res.status(200).send('Todo actualizado correctamente.');
       })
       .catch((error) => {
         console.log(error.message);
-        res.status(500).send('Error al actualizar la mascota.');
-      }),
-  );
+        res.status(500).send('Error al actualizar el usuario.');
+      });
 });
 
 //////////// DELETE PARA BORRAR USUARIOS /////////////////////////////

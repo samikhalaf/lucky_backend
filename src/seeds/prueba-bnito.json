@@ -222,3 +222,27 @@
   "updatedAt": "2020-11-08T12:56:17.254Z",
   "__v": 0
 }
+
+
+{
+  "name": "Juanita",
+  "specie": "pez",
+  "race": "besugo",
+  "image": "https://www.quo.es/wp-content/uploads/2019/10/el-sonido-de-los-grillo-se-apaga.-y-podria-ser-para-siempre.jpg",
+  "age": "anciano",
+  "sex": "hembra",
+  "size": "grande",
+  "weight": 24,
+  "history": "Viene del banco pesquero canario-saharaui",
+  "personality": ["tranquilo", "juguetón"],
+  "vaccined": true,
+  "dewormed": false,
+  "healthy": true,
+  "sterilized": false,
+  "identified": true,
+  "microchip": true,
+  "comments": "Le gusta nadar en gelatina de fresa",
+  "requeriments": "Gelatina de fresa de vez en cuando",
+  "fee": 35,
+  "delivery": false
+}
