@@ -27,10 +27,10 @@ const adoptSchema = new mongoose.Schema(
       required: true,
       minlength: 9,
     },
-    dni: { type: String, minlength: 9, maxlength: 9 },
+    dni: { type: String, minlength: 9, maxlength: 9, required: true },
     address: { type: String, minlength: 5, required: true },
-    zipCode: { type: String, required: true, minlength: 5, maxlength: 5 },
-    city: { type: String, required: true, maxlength: 20 },
+    zipCode: { type: String, minlength: 5, maxlength: 5, required: true },
+    city: { type: String, maxlength: 20, required: true },
     eula: { type: Boolean, required: true },
     morePetsInHome: { type: Boolean, required: true }, // tienes mas animales en casa?
     whichPetsInHome: { type: String, minlength: 3, maxlength: 280 }, // que mascotas hay en casa?
@@ -48,7 +48,6 @@ const adoptSchema = new mongoose.Schema(
     flatmatesOK: { type: Boolean, required: true }, // estan todos de acuerdo con la adopcion?
     visit: { type: Boolean }, // Estas de acuerdo con que visitemos tu casa?
     adoptionStatus: { type: String, enum: ['adjudicada', 'pendiente', 'denegada'] },
-    date: { type: Date, default: Date.now },
   },
   {
     timestamps: true,

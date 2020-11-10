@@ -98,7 +98,7 @@ router.post('/', validateData, (req, res) => {
       res.sendStatus(201);
     })
     .catch((error) => {
-      console.log('ERROR al guardar la mascota: ');
+      console.log('Error al guardar la mascota: ');
       console.log(error.message);
     });
 });

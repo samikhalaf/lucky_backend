@@ -1,7 +1,40 @@
 const express = require('express');
-const Adopt = require('../models/Adopt')
-const router = express.Router();
+const Adopt = require('../models/Adopt');
 
+// Validación de datos antes de escribirse en la DB
+
+const validateData = (req, res, next) => {
+  if (
+    typeof req.body.username === 'undefined' ||
+    typeof req.body.email === 'undefined' ||
+    typeof req.body.phone === 'undefined' ||
+    typeof req.body.dni === 'undefined' ||
+    typeof req.body.address === 'undefined' ||
+    typeof req.body.zipCode === 'undefined' ||
+    typeof req.body.city === 'undefined' ||
+    typeof req.body.eula === 'undefined' ||
+    typeof req.body.morePetsInHome === 'undefined' ||
+    typeof req.body.whyAdopting === 'undefined' ||
+    typeof req.body.petNeeds === 'undefined' ||
+    typeof req.body.petExpenses === 'undefined' ||
+    typeof req.body.petFeeding === 'undefined' ||
+    typeof req.body.garden === 'undefined' ||
+    typeof req.body.movingSoon === 'undefined' ||
+    typeof req.body.flatmates === 'undefined' ||
+    typeof req.body.flatmatesOK === 'undefined' ||
+    typeof req.body.movingSoon === 'undefined' ||
+    typeof req.body.role === 'undefined'
+  ) {
+    res
+      .status(400)
+      .send('Faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
+    return;
+  }
+
+  next();
+};
+
+const router = express.Router();
 
 //////////// GET PARA VER USUARIOS \\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -31,47 +64,46 @@ router.get('/:id', (req, res) => {
 
 //////////// POST PARA AÑADIR USUARIOS \\\\\\\\\\\\\\\\\\\\\\
 
-router.post('/', (req, res) => {
-  // Comprobación de que los campos requeridos están en la petición
+router.post('/', validateData, (req, res) => {
+  // Asignamos a cada valor su clave
 
-  if (
-    !req.body.username ||
-    !req.body.email ||
-    !req.body.password ||
-    !req.body.eula ||
-    !req.body.city ||
-    !req.body.zipCode ||
-    !req.body.role
-  ) {
-    res
-      .status(400)
-      .send('Te faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
-  }
+  const adoptProps = {
+    name: req.body.name,
+    email: req.body.email,
+    phone: req.body.phone,
+    dni: req.body.dni,
+    address: req.body.address,
+    zipCode: req.body.zipCode,
+    city: req.body.city,
+    eula: req.body.eula,
+    morePetsInHome: req.body.morePetsInHome,
+    whichPetsInHome: req.body.whichPetsInHome,
+    areTheyFriendly: req.body.areTheyFriendly,
+    whyAdopting: req.body.whyAdopting,
+    petNeeds: req.body.petNeeds,
+    petExpenses: req.body.petExpenses,
+    petFeeding: req.body.petFeeding,
+    homeType: req.body.homeType,
+    rentHome: req.body.rentHome,
+    landlordOK: req.body.landlordOK,
+    garden: req.body.garden,
+    movingSoon: req.body.movingSoon,
+    flatmates: req.body.flatmates,
+    flatmatesOK: req.body.flatmatesOK,
+    visit: req.body.visit,
+    adoptionStatus: req.body.adoptionStatus,
+  };
 
-  const adppt = new Adopt();
+  const adopt = new Adopt(adoptProps);
 
-  // Recogemos del body sus propiedades
-  // Se podria hacer con un map pero paso de añadir complejidad
-
-  user.username = req.body.username;
-  user.email = req.body.email;
-  user.password = req.body.password;
-  user.eula = req.body.eula;
-  user.city = req.body.city;
-  user.zipCode = req.body.zipCode;
-  user.avatar = req.body.avatar;
-  user.address = req.body.address;
-  user.contactPhone = req.body.contactPhone;
-  user.role = req.body.role;
-
-  // Aquí guardamos el usuario
+  // Aquí guardamos la mascota
 
   adopt
     .save()
     .then((storedAdopt) => {
       console.log('Guardado correctamente.');
       console.log(storedAdopt);
-      res.sendStatus(200);
+      res.sendStatus(201);
     })
     .catch((error) => {
       console.log('Error al guardar formulario de adopción: ');
@@ -85,27 +117,41 @@ router.put('/id', (req, res) => {
   const id = req.params.id;
 
   const updateAdopt = {
-    adoptname: req.body.adoptname,
+    name: req.body.name,
     email: req.body.email,
-    password: req.body.password,
-    eula: req.body.eula,
-    city: req.body.city,
+    phone: req.body.phone,
+    dni: req.body.dni,
+    address: req.body.address,
     zipCode: req.body.zipCode,
-    role: req.body.role,
+    city: req.body.city,
+    eula: req.body.eula,
+    morePetsInHome: req.body.morePetsInHome,
+    whichPetsInHome: req.body.whichPetsInHome,
+    areTheyFriendly: req.body.areTheyFriendly,
+    whyAdopting: req.body.whyAdopting,
+    petNeeds: req.body.petNeeds,
+    petExpenses: req.body.petExpenses,
+    petFeeding: req.body.petFeeding,
+    homeType: req.body.homeType,
+    rentHome: req.body.rentHome,
+    landlordOK: req.body.landlordOK,
+    garden: req.body.garden,
+    movingSoon: req.body.movingSoon,
+    flatmates: req.body.flatmates,
+    flatmatesOK: req.body.flatmatesOK,
+    visit: req.body.visit,
+    adoptionStatus: req.body.adoptionStatus,
   };
 
-  Adopt.findByIdAndUpdate(
-    id,
-    updateAdopt
+  Adopt.findByIdAndUpdate(id, updateAdopt)
       .then((preStoredAdopt) => {
         console.log(preStoredAdopt);
-        res.status(201).send('Todo actualizado correctamente.');
+        res.status(200).send('Todo actualizado correctamente.');
       })
       .catch((error) => {
         console.log(error.message);
         res.status(500).send('Error al actualizar el formulario de adopción.');
-      }),
-  );
+      });
 });
 
 //////////// DELETE PARA BORRAR USUARIOS \\\\\\\\\\\\\\\\\\\\\
