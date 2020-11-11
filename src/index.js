@@ -1,6 +1,7 @@
 // Paquetes que utilizamos para levantar nuestra API REST
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 // Referencia al router
 const apiRoutes = require('./routes/index.routes');
@@ -10,6 +11,9 @@ require('./config/db');
 
 // Arrancamos el server de express 🔥
 const server = express();
+
+// CORS pa que 
+server.use(cors());
 
 // Middleware de express, obligatorio, viene en la documentacion
 server.use(express.urlencoded({ extended: false }));
@@ -32,4 +36,3 @@ const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
   console.log(`Conectados a http://localhost:${PORT}`);
 });
-
