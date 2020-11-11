@@ -34,6 +34,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   Pet.find({})
+    .populate('association')
     .then((pets) => {
       return res.json(pets);
     })
@@ -48,6 +49,7 @@ router.get('/:id', (req, res) => {
   const id = req.params.id;
 
   Pet.findById(id)
+    .populate('association')
     .then((pet) => {
       return res.json(pet);
     })

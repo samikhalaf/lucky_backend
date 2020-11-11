@@ -26,7 +26,7 @@ const petSchema = new mongoose.Schema(
       required: true,
     },
     race: { type: String, required: true },
-    image: { type: String, required: true },
+    image: { type: Array, required: true },
     age: { type: String, enum: ['cría', 'joven', 'adulto', 'anciano'] },
     birthdate: { type: Date },
     sex: { type: String, enum: ['macho', 'hembra'], required: true },
@@ -37,21 +37,23 @@ const petSchema = new mongoose.Schema(
     },
     weight: { type: Number },
     history: { type: String, minlength: 30, maxlength: 280 },
-    personality: [{ 
-      type: String,
-      enum: [
-        'juguetón',
-        'timido',
-        'cariñoso',
-        'miedoso',
-        'inquieto',
-        'tranquilo',
-        'familiar',
-        'sociable con otros animales',
-        'callado',
-        'ruidoso',
-      ],
-    }],
+    personality: [
+      {
+        type: String,
+        enum: [
+          'juguetón',
+          'timido',
+          'cariñoso',
+          'miedoso',
+          'inquieto',
+          'tranquilo',
+          'familiar',
+          'sociable con otros animales',
+          'callado',
+          'ruidoso',
+        ],
+      },
+    ],
     vaccined: { type: Boolean, required: [true, false] },
     dewormed: { type: Boolean, required: [true, false] },
     healthy: { type: Boolean, required: [true, false] },
@@ -70,7 +72,3 @@ const petSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('Pet', petSchema);
-
-// POPULATE PARA METERLO EN EL GET DE LA PETICION
-// Pet.findById(_id).populate("association")
-//    .then loqueseaya;

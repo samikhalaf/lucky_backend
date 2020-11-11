@@ -1,0 +1,96 @@
+{
+  "username": "su_morenito_69",
+  "name": "Antoño",
+  "email": "eeeee@gmail.cat",
+  "password": "Bimbo12345",
+  "eula": true,
+  "city": "Madrid",
+  "zipCode": "28001",
+  "role": "basic"
+}
+
+{
+  "username": "lonchu",
+  "name": "Julia",
+  "email": "lonchu.jamon@gmail.com",
+  "password": "jdghsuipfgh665656",
+  "eula": true,
+  "city": "Arrecife",
+  "zipCode": "35508",
+  "avatar": "",
+  "role": "basic"
+}
+
+{
+  "username": "pezuñas_unidas",
+  "name": "Asociación Pezuñas Unidas",
+  "email": "pezunas_unidas@gmail.com",
+  "password": "SlavaStalin1917",
+  "eula": true,
+  "city": "Calatayud",
+  "zipCode": "25878",
+  "avatar": "",
+  "address": "Av Julio Anguita 55",
+  "contactPhone": "645212222",
+  "role": "association"
+}
+
+{
+  "username": "proa",
+  "name": "Asociación Proa",
+  "email": "proa-animalicos@gmail.com",
+  "password": "pobresbichos@",
+  "eula": true,
+  "city": "Ovieu",
+  "zipCode": "26542",
+  "avatar": "",
+  "address": "C/ del Sandwich Mixto 12",
+  "contactPhone": "584522254",
+  "role": "association"
+}
+
+{
+  "username": "la-razon-tetuan-",
+  "name": "Alfredo",
+  "email": "alf@redo.com",
+  "password": "fredoal12345",
+  "eula": true,
+  "city": "Tetuan",
+  "zipCode": "28152",
+  "avatar": "",
+  "role": "basic"
+}
+
+{
+  "username": "manchita-88",
+  "name": "Machita",
+  "email": "manchita-rguez@gmail.com",
+  "password": "tengonombredeanimal",
+  "eula": true,
+  "city": "Venta de Baños",
+  "zipCode": "35666",
+  "role": "basic"
+}
+
+{
+  "username": "ernestiko",
+  "name": "Ernesto",
+  "email": "ernestiko1990@gmail.com",
+  "password": "eeeeeeeeee2313",
+  "eula": true,
+  "city": "Santiago de Compostela",
+  "zipCode": "26545",
+  "role": "basic"
+}
+
+
+{
+  "username": "mati-meli",
+  "name": "Maltilda",
+  "email": "m_2323_garcia@gmail.uk.co",
+  "password": "wewehsdbjk323@",
+  "eula": true,
+  "city": "Melilla",
+  "zipCode": "36651",
+  "role": "basic"
+}

@@ -13,12 +13,13 @@ const userSchema = new mongoose.Schema(
       minlegth: 3,
       maxlength: 40,
     },
+    name: { type: String, required: true, minlegth: 3, maxlength: 40 },
     email: {
       type: String,
       trim: true,
       lowercase: true,
       unique: true,
-      required: 'Email address is required',
+      required: true,
       validate: [validateEmail, 'Please fill a valid email address'],
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
     },
@@ -26,10 +27,14 @@ const userSchema = new mongoose.Schema(
     eula: { type: Boolean, required: true },
     city: { type: String, required: true, maxlength: 40 },
     zipCode: { type: String, required: true, minlength: 5, maxlength: 5 },
-    avatar: { type: String, default: 'IMAGEN POR DEFECTO' }, 
+    avatar: { type: String, default: 'IMAGEN POR DEFECTO' },
     // FALTA POR METER LA IMAGEN POR DEFECTO
-    favorites: {type: Array},
 
+    // Sección usuarios
+    formHistory: { type: Array },
+    favorites: { type: Array },
+
+    // Sección protectoras
     address: { type: String, minlength: 5 },
     contactPhone: { type: String, minlength: 9 },
 

@@ -6,6 +6,7 @@ const User = require('../models/User');
 const validateData = (req, res, next) => {
   if (
     typeof req.body.username === 'undefined' ||
+    typeof req.body.name === 'undefined' ||
     typeof req.body.email === 'undefined' ||
     typeof req.body.password === 'undefined' ||
     typeof req.body.eula === 'undefined' ||
@@ -13,7 +14,9 @@ const validateData = (req, res, next) => {
     typeof req.body.zipCode === 'undefined' ||
     typeof req.body.role === 'undefined'
   ) {
-    res.status(400).send('Faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
+    res
+      .status(400)
+      .send('Faltan argumentos compa. No me estás enviando campos requeridos en la BBDD.');
     return;
   }
 
@@ -51,11 +54,11 @@ router.get('/:id', (req, res) => {
 //////////// POST PARA AÑADIR USUARIOS /////////////////////////////
 
 router.post('/', validateData, (req, res) => {
-
   // Asignamos a cada valor su clave
 
   const userProps = {
     username: req.body.username,
+    name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     eula: req.body.eula,
@@ -101,14 +104,14 @@ router.put('/:id', (req, res) => {
   };
 
   User.findByIdAndUpdate(id, updateUser)
-      .then((preStoredUser) => {
-        console.log(preStoredUser);
-        res.status(200).send('Todo actualizado correctamente.');
-      })
-      .catch((error) => {
-        console.log(error.message);
-        res.status(500).send('Error al actualizar el usuario.');
-      });
+    .then((preStoredUser) => {
+      console.log(preStoredUser);
+      res.status(200).send('Todo actualizado correctamente.');
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(500).send('Error al actualizar el usuario.');
+    });
 });
 
 //////////// DELETE PARA BORRAR USUARIOS /////////////////////////////

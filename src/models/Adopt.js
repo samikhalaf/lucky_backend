@@ -13,6 +13,7 @@ const adoptSchema = new mongoose.Schema(
       minlegth: 2,
       maxlength: 20,
     },
+    surname: { type: String, required: true, minlegth: 3, maxlength: 40 },
     email: {
       type: String,
       trim: true,
@@ -48,6 +49,7 @@ const adoptSchema = new mongoose.Schema(
     flatmatesOK: { type: Boolean, required: true }, // estan todos de acuerdo con la adopcion?
     visit: { type: Boolean }, // Estas de acuerdo con que visitemos tu casa?
     adoptionStatus: { type: String, enum: ['adjudicada', 'pendiente', 'denegada'] },
+    petID: { type: mongoose.Schema.Types.ObjectId, ref: 'Pet' },
   },
   {
     timestamps: true,
