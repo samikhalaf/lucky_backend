@@ -1,5 +1,6 @@
 const express = require('express');
 const Pet = require('../models/Pet');
+const cleanPayload = require('../utils/clean-payload');
 
 // Validación de datos antes de escribirse en la DB
 
@@ -110,7 +111,7 @@ router.post('/', validateData, (req, res) => {
 router.put('/:id', (req, res) => {
   const id = req.params.id;
 
-  const updatePet = {
+  const updatePet = cleanPayload({
     name: req.body.name,
     specie: req.body.specie,
     race: req.body.race,
@@ -124,7 +125,7 @@ router.put('/:id', (req, res) => {
     identified: req.body.identified,
     microchip: req.body.microchip,
     delivery: req.body.delivery,
-  };
+  });
 
   Pet.findByIdAndUpdate(id, updatePet)
     .then((preStoredPet) => {

@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('../models/User');
+const cleanPayload = require('../utils/clean-payload');
 
 // Validación de datos antes de escribirse en la DB
 
@@ -51,9 +52,9 @@ router.get('/:id', (req, res) => {
     });
 });
 
-//////////// POST PARA AÑADIR USUARIOS /////////////////////////////
+//////////// POST PARA REGISTRAR USUARIOS //////////////////////////////
 
-router.post('/', validateData, (req, res) => {
+router.post('/register', validateData, (req, res) => {
   // Asignamos a cada valor su clave
 
   const userProps = {
@@ -88,12 +89,37 @@ router.post('/', validateData, (req, res) => {
     });
 });
 
+//////////// POST PARA LOGUEAR USUARIOS ///////////////////////////////
+
+// router.post('/login', validateData, (req, res) => {
+//   // Asignamos a cada valor su clave
+
+//   const userProps = {
+//     email: req.body.email,
+//     password: req.body.password
+//   };
+
+//   const user = new User(userProps);
+
+//   user
+//     .save()
+//     .then((storedUser) => {
+//       console.log('Guardado correctamente.');
+//       console.log(storedUser);
+//       res.sendStatus(201);
+//     })
+//     .catch((error) => {
+//       console.log('Error al guardar el usuario: ');
+//       console.log(error.message);
+//     });
+// });
+
 //////////// PUT PARA ACTUALIZAR USUARIOS /////////////////////////////
 
 router.put('/:id', (req, res) => {
   const id = req.params.id;
 
-  const updateUser = {
+  const updateUser = cleanPayload ({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
@@ -101,7 +127,7 @@ router.put('/:id', (req, res) => {
     city: req.body.city,
     zipCode: req.body.zipCode,
     role: req.body.role,
-  };
+  });
 
   User.findByIdAndUpdate(id, updateUser)
     .then((preStoredUser) => {

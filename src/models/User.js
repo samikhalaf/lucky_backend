@@ -42,7 +42,15 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    toJSON: {
+      transform: (doc, ret) => {
+        delete ret.password;
+      },
+    },
   },
 );
 
 module.exports = mongoose.model('User', userSchema);
+
+
+// hacer una ruta de POST /users/register y otra de POST /users/login 

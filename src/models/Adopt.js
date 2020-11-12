@@ -19,11 +19,11 @@ const adoptSchema = new mongoose.Schema(
       trim: true,
       lowercase: true,
       unique: true,
-      required: 'Email address is required',
+      required: true,
       validate: [validateEmail, 'Please fill a valid email address'],
-      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,5})+$/, 'Please fill a valid email address'],
     },
-    phone: {
+    contactPhone: {
       type: Number,
       required: true,
       minlength: 9,
@@ -48,8 +48,8 @@ const adoptSchema = new mongoose.Schema(
     flatmates: { type: Boolean, required: true }, // vives con otras personas?
     flatmatesOK: { type: Boolean, required: true }, // estan todos de acuerdo con la adopcion?
     visit: { type: Boolean }, // Estas de acuerdo con que visitemos tu casa?
-    adoptionStatus: { type: String, enum: ['adjudicada', 'pendiente', 'denegada'] },
-    petID: { type: mongoose.Schema.Types.ObjectId, ref: 'Pet' },
+    adoptionStatus: { type: String, enum: ['adjudicada', 'pendiente', 'denegada'], default: "pendiente" },
+    pet: { type: mongoose.Schema.Types.ObjectId, ref: 'Pet', required: true },
   },
   {
     timestamps: true,

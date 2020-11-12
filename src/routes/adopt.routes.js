@@ -1,13 +1,15 @@
 const express = require('express');
 const Adopt = require('../models/Adopt');
+const cleanPayload = require('../utils/clean-payload');
 
 // Validación de datos antes de escribirse en la DB
 
 const validateData = (req, res, next) => {
   if (
-    typeof req.body.username === 'undefined' ||
+    typeof req.body.name === 'undefined' ||
+    typeof req.body.surname === 'undefined' ||
     typeof req.body.email === 'undefined' ||
-    typeof req.body.phone === 'undefined' ||
+    typeof req.body.contactPhone === 'undefined' ||
     typeof req.body.dni === 'undefined' ||
     typeof req.body.address === 'undefined' ||
     typeof req.body.zipCode === 'undefined' ||
@@ -22,8 +24,7 @@ const validateData = (req, res, next) => {
     typeof req.body.movingSoon === 'undefined' ||
     typeof req.body.flatmates === 'undefined' ||
     typeof req.body.flatmatesOK === 'undefined' ||
-    typeof req.body.movingSoon === 'undefined' ||
-    typeof req.body.role === 'undefined'
+    typeof req.body.pet === 'undefined'
   ) {
     res
       .status(400)
@@ -40,6 +41,12 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   Adopt.find({})
+    .populate({
+      // deep populate
+      path: 'petID',
+      populate: 'association',
+    })
+
     .then((adopt) => {
       return res.json(adopt);
     })
@@ -69,8 +76,9 @@ router.post('/', validateData, (req, res) => {
 
   const adoptProps = {
     name: req.body.name,
+    surname: req.body.name,
     email: req.body.email,
-    phone: req.body.phone,
+    contactPhone: req.body.contactPhone,
     dni: req.body.dni,
     address: req.body.address,
     zipCode: req.body.zipCode,
@@ -92,6 +100,7 @@ router.post('/', validateData, (req, res) => {
     flatmatesOK: req.body.flatmatesOK,
     visit: req.body.visit,
     adoptionStatus: req.body.adoptionStatus,
+    pet: req.body.pet,
   };
 
   const adopt = new Adopt(adoptProps);
@@ -116,7 +125,7 @@ router.post('/', validateData, (req, res) => {
 router.put('/id', (req, res) => {
   const id = req.params.id;
 
-  const updateAdopt = {
+  const updateAdopt = cleanPayload({
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
@@ -141,17 +150,17 @@ router.put('/id', (req, res) => {
     flatmatesOK: req.body.flatmatesOK,
     visit: req.body.visit,
     adoptionStatus: req.body.adoptionStatus,
-  };
+  });
 
   Adopt.findByIdAndUpdate(id, updateAdopt)
-      .then((preStoredAdopt) => {
-        console.log(preStoredAdopt);
-        res.status(200).send('Todo actualizado correctamente.');
-      })
-      .catch((error) => {
-        console.log(error.message);
-        res.status(500).send('Error al actualizar el formulario de adopción.');
-      });
+    .then((preStoredAdopt) => {
+      console.log(preStoredAdopt);
+      res.status(200).send('Todo actualizado correctamente.');
+    })
+    .catch((error) => {
+      console.log(error.message);
+      res.status(500).send('Error al actualizar el formulario de adopción.');
+    });
 });
 
 //////////// DELETE PARA BORRAR USUARIOS \\\\\\\\\\\\\\\\\\\\\
