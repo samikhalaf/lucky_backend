@@ -27,7 +27,7 @@ const userSchema = new mongoose.Schema(
     eula: { type: Boolean, required: true },
     city: { type: String, required: true, maxlength: 40 },
     zipCode: { type: String, required: true, minlength: 5, maxlength: 5 },
-    avatar: { type: String, default: 'IMAGEN POR DEFECTO' },
+    avatar: { type: String },
     // FALTA POR METER LA IMAGEN POR DEFECTO
 
     // Sección usuarios
