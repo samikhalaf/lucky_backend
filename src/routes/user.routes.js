@@ -3,7 +3,6 @@ const User = require('../models/User');
 const cleanPayload = require('../utils/clean-payload');
 
 // Middleware para subir las imágenes ↓
-const uploadImages = require('../middlewares/file.middleware');
 const imagesMiddleware = require('../middlewares/file.middleware');
 
 // Validación de datos antes de escribirse en la DB
@@ -130,7 +129,7 @@ router.put('/:id', imagesMiddleware.upload.single('avatar'), (req, res) => {
     eula: req.body.eula,
     city: req.body.city,
     zipCode: req.body.zipCode,
-    avatar: req.body.avatar,
+    avatar: '/uploads/' + req.file.filename,
     formHistory: req.body.formHistory,
     favorites: req.body.formHistory,
     address: req.body.address,

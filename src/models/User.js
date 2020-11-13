@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       required: true,
+      trim: true,
       minlegth: 3,
       maxlength: 40,
     },
@@ -23,12 +24,15 @@ const userSchema = new mongoose.Schema(
       validate: [validateEmail, 'Please fill a valid email address'],
       match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
     },
-    password: { type: String, required: true, minlength: 8 },
+    password: { type: String, required: true, trim: true, minlength: 8 },
     eula: { type: Boolean, required: true },
     city: { type: String, required: true, maxlength: 40 },
-    zipCode: { type: String, required: true, minlength: 5, maxlength: 5 },
-    avatar: { type: String },
-    // FALTA POR METER LA IMAGEN POR DEFECTO
+    zipCode: { type: Number, required: true, minlength: 5, maxlength: 5 },
+    avatar: { type: String, default: '/uploads/default_avatar.png' },
+    position: { 
+      latitude: { type: Number, default: 40.414249},
+      longitude: { type: Number, default: -3.703399}
+    },
 
     // Sección usuarios
     formHistory: { type: Array },
@@ -36,7 +40,7 @@ const userSchema = new mongoose.Schema(
 
     // Sección protectoras
     address: { type: String, minlength: 5 },
-    contactPhone: { type: String, minlength: 9 },
+    contactPhone: { type: Number, minlength: 9 },
 
     role: { type: String, enum: ['basic', 'association'], required: true },
   },
@@ -51,6 +55,3 @@ const userSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model('User', userSchema);
-
-
-// hacer una ruta de POST /users/register y otra de POST /users/login 

@@ -2,6 +2,9 @@ const express = require('express');
 const Pet = require('../models/Pet');
 const cleanPayload = require('../utils/clean-payload');
 
+// Middleware para subir las imágenes ↓
+const imagesMiddleware = require('../middlewares/file.middleware');
+
 // Validación de datos antes de escribirse en la DB
 
 const validateData = (req, res, next) => {
@@ -61,14 +64,14 @@ router.get('/:id', (req, res) => {
 
 //////////// POST PARA AÑADIR MASCOTAS /////////////////////////////
 
-router.post('/', validateData, (req, res) => {
+router.post('/', validateData, imagesMiddleware.upload.single('image'), (req, res) => {
   // Asignamos a cada valor su clave
 
   const petProps = {
     name: req.body.name,
     specie: req.body.specie,
     race: req.body.race,
-    image: req.body.image,
+    image: '/uploads/' + req.file.filename,
     age: req.body.age,
     birthday: req.body.birthday,
     sex: req.body.sex,
@@ -108,14 +111,14 @@ router.post('/', validateData, (req, res) => {
 
 //////////// PUT PARA ACTUALIZAR MASCOTAS /////////////////////////////
 
-router.put('/:id', (req, res) => {
+router.put('/:id', imagesMiddleware.upload.single('image'), (req, res) => {
   const id = req.params.id;
 
   const updatePet = cleanPayload({
     name: req.body.name,
     specie: req.body.specie,
     race: req.body.race,
-    image: req.body.image,
+    image: '/uploads/' + req.file.filename,
     sex: req.body.sex,
     size: req.body.size,
     vaccined: req.body.vaccined,
