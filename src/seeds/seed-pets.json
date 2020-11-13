@@ -1,6 +1,6 @@
 {
   "name": "bnito",
-  "specie": "gato",
+  "specie": "specie",
   "race": "común europeo",
   "image": [
     "https://mascotas-static.hola.com/elminizoo/files/2014/04/20140121_001208.jpg",
@@ -21,7 +21,7 @@
   "microchip": false,
   "comments": "Es un gato tranquilo y cariñoso. Solo maulla cuando le falta algo. Le gusta subirse a las personas y olerles el pelo",
   "requeriments": "",
-  "fee": 0,
+  "requeriments": 0,
   "delivery": false,
   "association": "5fac0b0937de8e19347eb168"
 }

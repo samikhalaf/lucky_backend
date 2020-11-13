@@ -64,7 +64,7 @@ router.get('/:id', (req, res) => {
 
 //////////// POST PARA AÑADIR MASCOTAS /////////////////////////////
 
-router.post('/', validateData, imagesMiddleware.upload.single('image'), (req, res) => {
+router.post('/', imagesMiddleware.upload.single('image'), (req, res) => {
   // Asignamos a cada valor su clave
 
   const petProps = {
