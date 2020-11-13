@@ -7,7 +7,11 @@ const adoptRouter = require('./adopt.routes');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  res.status(200).send('Server running OK');
+  res
+    .status(200)
+    .send(
+      '<body style="height: 100vh; width: 100vw; display:flex; flex-direction: column; justify-content: center; align-items: center"><h1>¡Eyyy que pasa!</h1> <p>Esta API REST va fina.</p><p>Pruébame poniendo ~/pets o ~/users en la url</p></body>',
+    );
   console.log(req);
 });
 
