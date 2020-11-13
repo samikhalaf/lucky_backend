@@ -12,11 +12,14 @@ require('./config/db');
 // Arrancamos el server de express 🔥
 const server = express();
 
-// CORS pa que 
+// CORS pa que
 server.use(cors());
 
 // Middleware de express, obligatorio, viene en la documentacion
 server.use(express.urlencoded({ extended: false }));
+
+// Middleware que permite una ruta a contenido estático
+server.use(express.static('public'));
 
 // Este parsea todo el body de las peticiones HTTP en json
 server.use(express.json());

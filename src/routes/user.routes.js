@@ -2,6 +2,9 @@ const express = require('express');
 const User = require('../models/User');
 const cleanPayload = require('../utils/clean-payload');
 
+// Middleware para subir las imágenes ↓
+const imagesMiddleware = require('../middlewares/file.middleware');
+
 // Validación de datos antes de escribirse en la DB
 
 const validateData = (req, res, next) => {
@@ -54,7 +57,7 @@ router.get('/:id', (req, res) => {
 
 //////////// POST PARA REGISTRAR USUARIOS //////////////////////////////
 
-router.post('/register', validateData, (req, res) => {
+router.post('/register', imagesMiddleware.upload.single('avatar'), (req, res) => {
   // Asignamos a cada valor su clave
 
   const userProps = {
@@ -65,7 +68,7 @@ router.post('/register', validateData, (req, res) => {
     eula: req.body.eula,
     city: req.body.city,
     zipCode: req.body.zipCode,
-    avatar: req.body.avatar,
+    avatar: '/uploads/' + req.file.filename,
     favorites: req.body.favorites,
     address: req.body.address,
     contactPhone: req.body.contactPhone,
@@ -116,16 +119,21 @@ router.post('/register', validateData, (req, res) => {
 
 //////////// PUT PARA ACTUALIZAR USUARIOS /////////////////////////////
 
-router.put('/:id', (req, res) => {
+router.put('/:id', imagesMiddleware.upload.single('avatar'), (req, res) => {
   const id = req.params.id;
 
-  const updateUser = cleanPayload ({
+  const updateUser = cleanPayload({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
     eula: req.body.eula,
     city: req.body.city,
     zipCode: req.body.zipCode,
+    avatar: '/uploads/' + req.file.filename,
+    formHistory: req.body.formHistory,
+    favorites: req.body.formHistory,
+    address: req.body.address,
+    contactPhone: req.body.contactPhone,
     role: req.body.role,
   });
 
