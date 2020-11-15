@@ -71,7 +71,7 @@ router.post('/', imagesMiddleware.upload.single('image'), (req, res) => {
     name: req.body.name,
     specie: req.body.specie,
     race: req.body.race,
-    image: '/uploads/' + req.file.filename,
+    image: `/uploads/${req.file.filename}`,
     age: req.body.age,
     birthday: req.body.birthday,
     sex: req.body.sex,

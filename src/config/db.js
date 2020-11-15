@@ -10,6 +10,6 @@ mongoose
     useCreateIndex: true,
   })
   .then(() => {
-    console.log('Conectados a Mongo Atlas ⚡');
+    console.log('\x1b[33m%s\x1b[0m', '*** Conectados a Mongo Atlas ⚡');
   })
   .catch((error) => console.log(`Error connecting to DB: ${error.message}`));

@@ -37,14 +37,14 @@ server.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {
-  console.log('Welcome to the');
-  console.log('██▓     █    ██  ▄████▄   ██ ▄█▀▓██   ██▓');
-  console.log('▒██░    ▓██  ▒██░▒▓█    ▄ ▓███▄░   ▒██ ██░');
-  console.log('▒██░    ▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄   ░ ▐██▓░');
-  console.log('░██████▒▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄  ░ ██▒▓░');
-  console.log('░ ░ ▒  ░░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░ ▓██ ░▒░ ');
-  console.log('  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░  ▒ ▒ ░░  ');
-  console.log('    ░  ░   ░     ░ ░      ░  ░    ░ ░     ');
-  console.log('                 ░                ░ ░      API REST');
-  console.log(`*** Conectados a http://localhost:${PORT} ***`);
+  console.log('\x1b[35m%s\x1b[0m', 'Welcome to the');
+  console.log('\x1b[35m%s\x1b[0m', '▒█▓     ▒██  ▒██  ▄████▄  ▓██ ▄█▀▒██   ██▓');
+  console.log('\x1b[35m%s\x1b[0m', '▒██░    ▒██  ▒██░▒██    ▄ ▓████░   ▒██ ██░');
+  console.log('\x1b[35m%s\x1b[0m', '▒██░    ▒▓█  ░██░▒██▄ ▄██▒▓██ █▄   ░ ▐██▓░');
+  console.log('\x1b[35m%s\x1b[0m', '░██████▒▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄  ░ ██▒░░');
+  console.log('\x1b[35m%s\x1b[0m', '░ ░ ▒  ░░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░ ▓██ ░▒░ ');
+  console.log('\x1b[35m%s\x1b[0m', '  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░  ▒ ▒ ░░  ');
+  console.log('\x1b[35m%s\x1b[0m', '    ░  ░   ░     ░ ░      ░  ░    ░ ░     ');
+  console.log('\x1b[35m%s\x1b[0m', '                 ░                ░ ░   API REST');
+  console.log('\x1b[36m%s\x1b[0m', `*** Conectados a http://localhost:${PORT}`);
 });
