@@ -37,5 +37,14 @@ server.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {
-  console.log(`Conectados a http://localhost:${PORT}`);
+  console.log('Welcome to the');
+  console.log('██▓     █    ██  ▄████▄   ██ ▄█▀▓██   ██▓');
+  console.log('▒██░    ▓██  ▒██░▒▓█    ▄ ▓███▄░   ▒██ ██░');
+  console.log('▒██░    ▓▓█  ░██░▒▓▓▄ ▄██▒▓██ █▄   ░ ▐██▓░');
+  console.log('░██████▒▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄  ░ ██▒▓░');
+  console.log('░ ░ ▒  ░░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░ ▓██ ░▒░ ');
+  console.log('  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░  ▒ ▒ ░░  ');
+  console.log('    ░  ░   ░     ░ ░      ░  ░    ░ ░     ');
+  console.log('                 ░                ░ ░      API REST');
+  console.log(`*** Conectados a http://localhost:${PORT} ***`);
 });
