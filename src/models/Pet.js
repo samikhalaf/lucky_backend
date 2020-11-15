@@ -67,7 +67,7 @@ const petSchema = new mongoose.Schema(
     microchip: { type: Boolean, required: [true, false] },
     comments: { type: String, maxlength: 140 },
     requeriments: { type: String },
-    fee: { type: Number },
+    fee: { type: Number, default: 0 },
     delivery: { type: String, required: [true, false] },
     association: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   },
