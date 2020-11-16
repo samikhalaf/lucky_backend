@@ -29,9 +29,9 @@ const userSchema = new mongoose.Schema(
     city: { type: String, required: true, maxlength: 40 },
     zipCode: { type: Number, required: true, minlength: 5, maxlength: 5 },
     avatar: { type: String, default: '/uploads/default_avatar.png' },
-    position: { 
-      latitude: { type: Number, default: 40.414249},
-      longitude: { type: Number, default: -3.703399}
+    position: {
+      latitude: { type: Number, default: 40.414249 },
+      longitude: { type: Number, default: -3.703399 },
     },
 
     // Sección usuarios
@@ -49,6 +49,7 @@ const userSchema = new mongoose.Schema(
     toJSON: {
       transform: (doc, ret) => {
         delete ret.password;
+        delete ret.googleId;
       },
     },
   },

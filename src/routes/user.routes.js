@@ -1,5 +1,12 @@
 const express = require('express');
+const passport = require('passport');
+
+const { isAuthenticated } = require('../middlewares/authentication.middleware');
+
+// Importo modelo de usuario
 const User = require('../models/User');
+
+// Verifico que llega todo limpio
 const cleanPayload = require('../utils/clean-payload');
 
 // Paquete que hashea las contraseñas
@@ -44,6 +51,13 @@ router.get('/', (req, res) => {
     });
 });
 
+// router.get(
+//   '/google',
+//   passport.authenticate('google', {
+//     scope: ['profile', 'email'],
+//   }),
+// );
+
 //////////// GET PARA VER USUARIO (POR ID) /////////////////////////////
 
 router.get('/:id', (req, res) => {
@@ -60,71 +74,15 @@ router.get('/:id', (req, res) => {
 
 //////////// POST PARA REGISTRAR USUARIOS //////////////////////////////
 
-router.post('/register', imagesMiddleware.upload.single('avatar'), (req, res) => {
-  // Asignamos a cada valor su clave
-
-  bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-    if (err) {
-      return res.status(500).send('Error al guardar nuevo usuario');
-    }
-
-    const userProps = {
-      username: req.body.username,
-      name: req.body.name,
-      email: req.body.email,
-      password: hash, // Aquí meto la password hasheada
-      eula: req.body.eula,
-      city: req.body.city,
-      zipCode: req.body.zipCode,
-      avatar: `/uploads/${req.file.filename}`,
-      favorites: req.body.favorites,
-      address: req.body.address,
-      contactPhone: req.body.contactPhone,
-      role: req.body.role,
-    };
-
-    const user = new User(userProps);
-
-    // Aquí guardamos el usuario
-
-    user
-      .save()
-      .then((storedUser) => {
-        console.log('Guardado correctamente.');
-        console.log(storedUser);
-        res.sendStatus(201);
-      })
-      .catch((error) => {
-        console.log('Error al guardar el usuario: ');
-        console.log(error.message);
-      });
-  });
-});
+router.post('/register', passport.authenticate('register'), (req, res) =>
+  res.status(200).json({ data: req.user }),
+);
 
 //////////// POST PARA LOGUEAR USUARIOS ///////////////////////////////
 
-// router.post('/login',(req, res) => {
-//   // Asignamos a cada valor su clave
-
-//   const userProps = {
-//     email: req.body.email,
-//     password: req.body.password,
-//   };
-
-//   const user = new User(userProps);
-
-//   user
-//     .save()
-//     .then((storedUser) => {
-//       console.log('Guardado correctamente.');
-//       console.log(storedUser);
-//       res.sendStatus(201);
-//     })
-//     .catch((error) => {
-//       console.log('Error al guardar el usuario: ');
-//       console.log(error.message);
-//     });
-// });
+router.post('/login', passport.authenticate('login'), (req, res) =>
+  res.status(200).json({ data: req.user }),
+);
 
 //////////// PUT PARA ACTUALIZAR USUARIOS /////////////////////////////
 
@@ -170,6 +128,16 @@ router.delete('/:id', (req, res) => {
       console.log(error.message);
       return res.status(500).send('No se ha podido borrar el usuario');
     });
+});
+
+//////////// GET PARA CERRAR SESION /////////////////////////////
+
+router.get('/logout', (req, res) => {
+  // Logout using the passport added logout method
+  req.logout();
+
+  // Send user to check if it's really logged out
+  res.status(200).json({ data: 'OK' });
 });
 
 module.exports = router;

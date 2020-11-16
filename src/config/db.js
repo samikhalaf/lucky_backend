@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 
-const uri =
-  'mongodb+srv://lucky_app:RosendoChas1234@lucky-cluster.zjrqk.mongodb.net/luckydb?retryWrites=true&w=majority';
+dotenv.config();
+
 mongoose
-  .connect(uri, {
+  .connect(process.env.DB_CONNECT, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,
