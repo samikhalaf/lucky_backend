@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
 const User = require('../models/User');
+const cleanPayload = require('../utils/clean-payload');
 
 passport.use(
   'register',
@@ -17,6 +18,19 @@ passport.use(
         .then((user) => {
           // If there is no user in DB, register it
           if (!user) {
+            const userProps = cleanPayload({
+              username: req.body.username,
+              name: req.body.name,
+              eula: req.body.eula,
+              city: req.body.city,
+              zipCode: req.body.zipCode,
+              avatar: req.file ? `/uploads/${req.file.filename}` : null,
+              favorites: req.body.favorites,
+              address: req.body.address,
+              contactPhone: req.body.contactPhone,
+              role: req.body.role,
+            });
+
             const salt = bcrypt.genSaltSync(12);
             const hash = bcrypt.hashSync(password, salt);
 
@@ -24,6 +38,7 @@ passport.use(
               email,
               password: hash,
               // Add all other fields from here on using the req object...
+              ...userProps,
             });
 
             newUser
@@ -74,7 +89,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// Get the cookie from the request and convert it into the user
+// Get the cookie from the request and convert it into the user req.user
 passport.deserializeUser((id, done) => {
   User.findById(id).then((user) => done(null, user));
 });

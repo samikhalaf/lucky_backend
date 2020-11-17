@@ -8,10 +8,6 @@ const User = require('../models/User');
 // Verifico que llega todo limpio
 const cleanPayload = require('../utils/clean-payload');
 
-// Paquete que hashea las contraseñas
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-
 // Middleware para subir las imágenes ↓
 const imagesMiddleware = require('../middlewares/file.middleware');
 
@@ -40,7 +36,7 @@ const router = express.Router();
 
 //////////// GET PARA VER USUARIOS /////////////////////////////
 
-router.get('/', (req, res) => {
+router.get('/', [isAuthenticated], (req, res) => {
   User.find({})
     .then((user) => {
       return res.json(user);

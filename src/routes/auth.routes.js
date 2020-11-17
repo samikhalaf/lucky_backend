@@ -3,6 +3,15 @@ const passport = require('passport');
 
 const router = express.Router();
 
+//////////// GET PARA COMPROBAR QUE ESTAMOS LOGEADOS //////////////////////////////
+router.get('/is-logged', (req, res) => {
+  if (req.user) {
+    res.status(200).json({ data: true });
+  } else {
+    res.status(401).json({ data: false });
+  }
+});
+
 //////////// POST PARA REGISTRAR USUARIOS //////////////////////////////
 router.post('/register', passport.authenticate('register'), (req, res) =>
   res.status(200).json({ data: req.user }),
@@ -22,4 +31,4 @@ router.get('/logout', (req, res) => {
   res.status(200).json({ data: 'OK' });
 });
 
-module.export = router;
+module.exports = router;
