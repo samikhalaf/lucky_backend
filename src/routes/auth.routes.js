@@ -3,6 +3,8 @@ const passport = require('passport');
 
 const router = express.Router();
 
+const { upload } = require('../middlewares/file.middleware');
+
 //////////// GET PARA COMPROBAR QUE ESTAMOS LOGEADOS //////////////////////////////
 router.get('/is-logged', (req, res) => {
   if (req.user) {
@@ -13,7 +15,7 @@ router.get('/is-logged', (req, res) => {
 });
 
 //////////// POST PARA REGISTRAR USUARIOS //////////////////////////////
-router.post('/register', passport.authenticate('register'), (req, res) =>
+router.post('/register', [upload.single('avatar'), passport.authenticate('register')], (req, res) =>
   res.status(200).json({ data: req.user }),
 );
 
