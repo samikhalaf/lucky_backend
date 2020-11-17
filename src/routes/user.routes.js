@@ -1,10 +1,12 @@
 const express = require('express');
-const User = require('../models/User');
-const cleanPayload = require('../utils/clean-payload');
 
-// Paquete que hashea las contraseñas
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
+const { isAuthenticated } = require('../middlewares/authentication.middleware');
+
+// Importo modelo de usuario
+const User = require('../models/User');
+
+// Verifico que llega todo limpio
+const cleanPayload = require('../utils/clean-payload');
 
 // Middleware para subir las imágenes ↓
 const imagesMiddleware = require('../middlewares/file.middleware');
@@ -34,7 +36,7 @@ const router = express.Router();
 
 //////////// GET PARA VER USUARIOS /////////////////////////////
 
-router.get('/', (req, res) => {
+router.get('/', [isAuthenticated], (req, res) => {
   User.find({})
     .then((user) => {
       return res.json(user);
@@ -43,6 +45,13 @@ router.get('/', (req, res) => {
       return res.status(500).json(err);
     });
 });
+
+// router.get(
+//   '/google',
+//   passport.authenticate('google', {
+//     scope: ['profile', 'email'],
+//   }),
+// );
 
 //////////// GET PARA VER USUARIO (POR ID) /////////////////////////////
 
@@ -57,74 +66,6 @@ router.get('/:id', (req, res) => {
       return res.status(500).json(err);
     });
 });
-
-//////////// POST PARA REGISTRAR USUARIOS //////////////////////////////
-
-router.post('/register', imagesMiddleware.upload.single('avatar'), (req, res) => {
-  // Asignamos a cada valor su clave
-
-  bcrypt.hash(req.body.password, saltRounds, (err, hash) => {
-    if (err) {
-      return res.status(500).send('Error al guardar nuevo usuario');
-    }
-
-    const userProps = {
-      username: req.body.username,
-      name: req.body.name,
-      email: req.body.email,
-      password: hash, // Aquí meto la password hasheada
-      eula: req.body.eula,
-      city: req.body.city,
-      zipCode: req.body.zipCode,
-      avatar: `/uploads/${req.file.filename}`,
-      favorites: req.body.favorites,
-      address: req.body.address,
-      contactPhone: req.body.contactPhone,
-      role: req.body.role,
-    };
-
-    const user = new User(userProps);
-
-    // Aquí guardamos el usuario
-
-    user
-      .save()
-      .then((storedUser) => {
-        console.log('Guardado correctamente.');
-        console.log(storedUser);
-        res.sendStatus(201);
-      })
-      .catch((error) => {
-        console.log('Error al guardar el usuario: ');
-        console.log(error.message);
-      });
-  });
-});
-
-//////////// POST PARA LOGUEAR USUARIOS ///////////////////////////////
-
-// router.post('/login',(req, res) => {
-//   // Asignamos a cada valor su clave
-
-//   const userProps = {
-//     email: req.body.email,
-//     password: req.body.password,
-//   };
-
-//   const user = new User(userProps);
-
-//   user
-//     .save()
-//     .then((storedUser) => {
-//       console.log('Guardado correctamente.');
-//       console.log(storedUser);
-//       res.sendStatus(201);
-//     })
-//     .catch((error) => {
-//       console.log('Error al guardar el usuario: ');
-//       console.log(error.message);
-//     });
-// });
 
 //////////// PUT PARA ACTUALIZAR USUARIOS /////////////////////////////
 

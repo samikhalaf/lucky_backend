@@ -1,7 +1,14 @@
 // Paquetes que utilizamos para levantar nuestra API REST
+require('dotenv').config();
 const express = require('express');
+const passport = require('passport');
 const morgan = require('morgan');
 const cors = require('cors');
+const cookieSession = require('cookie-session');
+
+require('./config/db');
+require('./config/passport');
+const errorHandler = require('./config/error-handler');
 
 // Referencia al router
 const apiRoutes = require('./routes/index.routes');
@@ -13,7 +20,12 @@ require('./config/db');
 const server = express();
 
 // CORS pa que
-server.use(cors());
+server.use(
+  cors({
+    origin: true, // Easy cors origin validation for development purposes
+    credentials: true,
+  }),
+);
 
 // Middleware de express, obligatorio, viene en la documentacion
 server.use(express.urlencoded({ extended: false }));
@@ -24,15 +36,22 @@ server.use(express.static('public'));
 // Este parsea todo el body de las peticiones HTTP en json
 server.use(express.json());
 
+server.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000, // milliseconds of a day
+    keys: [process.env.COOKIE_KEY || 'express-auth-cookie'],
+  }),
+);
+
+server.use(passport.initialize());
+server.use(passport.session());
+
 server.use(apiRoutes);
 
 server.use(morgan('tiny'));
 
 // Ultima red de seguridad para control de errores
-server.use((err, req, res, next) => {
-  console.log('Entramos en el control de errores');
-  return res.status(err.status || 500).json(err.message || 'Unexpected error');
-});
+server.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
 
