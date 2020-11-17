@@ -1,9 +1,13 @@
 // Paquetes que utilizamos para levantar nuestra API REST
+require('dotenv').config();
 const express = require('express');
 const passport = require('passport');
 const morgan = require('morgan');
 const cors = require('cors');
 const cookieSession = require('cookie-session');
+
+require('./config/db');
+require('./config/passport');
 
 // Referencia al router
 const apiRoutes = require('./routes/index.routes');
