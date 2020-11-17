@@ -1,5 +1,4 @@
 const express = require('express');
-const passport = require('passport');
 
 const { isAuthenticated } = require('../middlewares/authentication.middleware');
 
@@ -72,18 +71,6 @@ router.get('/:id', (req, res) => {
     });
 });
 
-//////////// POST PARA REGISTRAR USUARIOS //////////////////////////////
-
-router.post('/register', passport.authenticate('register'), (req, res) =>
-  res.status(200).json({ data: req.user }),
-);
-
-//////////// POST PARA LOGUEAR USUARIOS ///////////////////////////////
-
-router.post('/login', passport.authenticate('login'), (req, res) =>
-  res.status(200).json({ data: req.user }),
-);
-
 //////////// PUT PARA ACTUALIZAR USUARIOS /////////////////////////////
 
 router.put('/:id', imagesMiddleware.upload.single('avatar'), (req, res) => {
@@ -128,16 +115,6 @@ router.delete('/:id', (req, res) => {
       console.log(error.message);
       return res.status(500).send('No se ha podido borrar el usuario');
     });
-});
-
-//////////// GET PARA CERRAR SESION /////////////////////////////
-
-router.get('/logout', (req, res) => {
-  // Logout using the passport added logout method
-  req.logout();
-
-  // Send user to check if it's really logged out
-  res.status(200).json({ data: 'OK' });
 });
 
 module.exports = router;

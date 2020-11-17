@@ -3,6 +3,7 @@ const express = require('express');
 const petsRouter = require('./pet.routes');
 const usersRouter = require('./user.routes');
 const adoptRouter = require('./adopt.routes');
+const authRouter = require('./auth.routes');
 
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.get('/', (req, res) => {
 router.use('/pets', petsRouter);
 router.use('/users', usersRouter);
 router.use('/adopt', adoptRouter);
+router.use('/auth', authRouter);
 
 // Middleware para rutas inexistentes (NO VA)
 // server.use('/*', (req, res, next) => {
