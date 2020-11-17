@@ -8,6 +8,7 @@ const cookieSession = require('cookie-session');
 
 require('./config/db');
 require('./config/passport');
+const errorHandler = require('./config/error-handler');
 
 // Referencia al router
 const apiRoutes = require('./routes/index.routes');
@@ -50,10 +51,7 @@ server.use(apiRoutes);
 server.use(morgan('tiny'));
 
 // Ultima red de seguridad para control de errores
-server.use((err, req, res, next) => {
-  console.log('Entramos en el control de errores');
-  return res.status(err.status || 500).json(err.message || 'Unexpected error');
-});
+server.use(errorHandler);
 
 const PORT = process.env.PORT || 3001;
 
