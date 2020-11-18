@@ -12,6 +12,7 @@ const errorHandler = require('./config/error-handler');
 
 // Referencia al router
 const apiRoutes = require('./routes/index.routes');
+const welcome = require('./utils/welcome');
 
 // Configuracion de nuestra BBDD
 require('./config/db');
@@ -56,14 +57,6 @@ server.use(errorHandler);
 const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {
-  console.log('\x1b[35m%s\x1b[0m', 'Welcome to the');
-  console.log('\x1b[35m%s\x1b[0m', '▒█▓     ▒██  ▒██  ▄████▄  ▓██ ▄█▀▒██   ██▓');
-  console.log('\x1b[35m%s\x1b[0m', '▒██░    ▒██  ▒██░▒██    ▄ ▓████░   ▒██ ██░');
-  console.log('\x1b[35m%s\x1b[0m', '▒██░    ▒▓█  ░██░▒██▄ ▄██▒▓██ █▄   ░ ▐██▓░');
-  console.log('\x1b[35m%s\x1b[0m', '░██████▒▒▒█████▓ ▒ ▓███▀ ░▒██▒ █▄  ░ ██▒░░');
-  console.log('\x1b[35m%s\x1b[0m', '░ ░ ▒  ░░░▒░ ░ ░   ░  ▒   ░ ░▒ ▒░ ▓██ ░▒░ ');
-  console.log('\x1b[35m%s\x1b[0m', '  ░ ░    ░░░ ░ ░ ░        ░ ░░ ░  ▒ ▒ ░░  ');
-  console.log('\x1b[35m%s\x1b[0m', '    ░  ░   ░     ░ ░      ░  ░    ░ ░     ');
-  console.log('\x1b[35m%s\x1b[0m', '                 ░                ░ ░   API REST');
+  welcome();
   console.log('\x1b[36m%s\x1b[0m', `*** Conectados a http://localhost:${PORT}`);
 });
