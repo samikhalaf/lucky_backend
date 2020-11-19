@@ -10,9 +10,7 @@ Este back usa un clúster de Mongo Atlas para alojar su base de datos. Esto sign
 
 - Instalar la extensión `Mongo DB for VS Code` (tiene unas 57K descargas).
 - Ir a la pestaña nueva en el menú de la izquierda (es una hojita).
-- Darle a `Connect with a connection string` (debajo del titulo). Ponemos esto:
-
-`mongodb+srv://lucky_app:RosendoChas1234@lucky-cluster.zjrqk.mongodb.net/luckydb?retryWrites=true&w=majority`
+- Darle a `Connect with a connection string` (debajo del titulo). Ponemos una connection string de Mongo Atlas:
 
 - Slava! Ya tenemos full access a nuestro clúster sin salir del VS Code.
 
@@ -22,35 +20,39 @@ Este back usa un clúster de Mongo Atlas para alojar su base de datos. Esto sign
 
 ### /pets
 
-`GET` → devuelve todos los bichos en json, si pones `/:id` te devuelve uno solo ✅
+`GET` → devuelve todos los bichos en json, si pones `/:id` te devuelve uno solo
 
-`POST` → mete un bicho en la BBDD ✅
+`POST` → mete un bicho en la BBDD
 
-`PUT` → modifica los datos de un bicho ✅
+`PUT` → modifica los datos de un bicho
 
-`DELETE` → con `/:id` funciona perfecto ✅
+`DELETE` → con `/:id` borra un bicho de la BBDD
 
 ### /users
 
-`GET` → devuelve todos los usuarios en json, si pones `/:id` te devuelve uno solo ✅
+`GET` → devuelve todos los usuarios en json, si pones `/:id` te devuelve uno solo
 
-`POST` en `/pets/register` mete un user en la BBDD ✅
+`PUT` → modifica los datos de un usuario
 
-`POST` en `/pets/login` verifica hashes y te da un token para navegar logueado ✅
+`DELETE` → con `/:id` borra un usuario de la BBDD
 
-`PUT` → modifica los datos de un usuario ✅
+### /auth
 
-`DELETE` → con `/:id` funciona perfecto ✅
+`POST` en `/auth/register` mete un usuario nuevo en la BBDD
+
+`POST` en `auth/login` comprueba si el email y la password un usuario registrado son correctos y te da una cookie de autenticación
+
+`POST` en `auth/logout` cierra sesión
 
 ### /adopts
 
-`GET` → devuelve todos los formularios de adopción en json, si pones `/:id` te devuelve uno solo ✅
+`GET` → devuelve todos los formularios de adopción en json, si pones `/:id` te devuelve uno solo
 
-`POST` → mete un formulario de adopcion en la BBDD ✅
+`POST` → mete un formulario de adopcion en la BBDD
 
-`PUT` → modifica los datos de un formulario de adopción ✅
+`PUT` → modifica los datos de un formulario de adopción
 
-`DELETE` → con `/:id` funciona perfecto ✅
+`DELETE` → con `/:id` funciona perfecto
 
 ## Sobre el guardado de imágenes
 
@@ -74,6 +76,12 @@ Para el desarrollo de esta API se han utilizado los siguientes paquetes:
 
 - Multer → para gestionar la subida y acceso a imágenes
 
-- jwt → para gestionar los tokens de autenticación
+- Passport → para autenticar
 
 - bcrypt → para hashear las contraseñas
+
+- Cookie Session → para gestionar las cookies de autenticación
+
+- Morgan → herramienta de logging para desarrollar y debuggear
+
+- Dotenv → para gestionar las variables de entorno

@@ -69,7 +69,7 @@ router.get('/:id', (req, res) => {
 
 //////////// PUT PARA ACTUALIZAR USUARIOS /////////////////////////////
 
-router.put('/:id', imagesMiddleware.upload.single('avatar'), (req, res) => {
+router.put('/:id', [isAuthenticated, imagesMiddleware.upload.single('avatar')], (req, res) => {
   const id = req.params.id;
 
   const updateUser = cleanPayload({
