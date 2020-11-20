@@ -118,7 +118,7 @@ router.put('/:id', imagesMiddleware.upload.single('image'), (req, res) => {
     name: req.body.name,
     specie: req.body.specie,
     race: req.body.race,
-    image: '/uploads/' + req.file.filename,
+    image: req.file ? `/uploads/${req.file.filename}` : null,
     sex: req.body.sex,
     size: req.body.size,
     vaccined: req.body.vaccined,

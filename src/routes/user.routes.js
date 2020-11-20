@@ -74,12 +74,14 @@ router.put('/:id', [isAuthenticated, imagesMiddleware.upload.single('avatar')], 
 
   const updateUser = cleanPayload({
     username: req.body.username,
+    name: req.body.name,
     email: req.body.email,
     password: req.body.password,
     eula: req.body.eula,
     city: req.body.city,
     zipCode: req.body.zipCode,
-    avatar: '/uploads/' + req.file.filename,
+    avatar: req.file ? `/uploads/${req.file.filename}` : null,
+    position: req.body.position,
     formHistory: req.body.formHistory,
     favorites: req.body.formHistory,
     address: req.body.address,
@@ -89,7 +91,6 @@ router.put('/:id', [isAuthenticated, imagesMiddleware.upload.single('avatar')], 
 
   User.findByIdAndUpdate(id, updateUser)
     .then((preStoredUser) => {
-      console.log(preStoredUser);
       res.status(200).send('Todo actualizado correctamente.');
     })
     .catch((error) => {
