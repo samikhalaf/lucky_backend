@@ -43,7 +43,7 @@ router.get('/', (req, res) => {
   Adopt.find({})
     .populate({
       // deep populate
-      path: 'petID',
+      path: 'pet',
       populate: 'association',
     })
 
@@ -76,7 +76,7 @@ router.post('/', validateData, (req, res) => {
 
   const adoptProps = {
     name: req.body.name,
-    surname: req.body.name,
+    surname: req.body.surname,
     email: req.body.email,
     contactPhone: req.body.contactPhone,
     dni: req.body.dni,

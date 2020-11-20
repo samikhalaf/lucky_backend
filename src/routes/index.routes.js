@@ -4,6 +4,7 @@ const petsRouter = require('./pet.routes');
 const usersRouter = require('./user.routes');
 const adoptRouter = require('./adopt.routes');
 const authRouter = require('./auth.routes');
+const favoritesRouter = require('./favorites.routes');
 
 const router = express.Router();
 
@@ -19,8 +20,9 @@ router.use('/pets', petsRouter);
 router.use('/users', usersRouter);
 router.use('/adopt', adoptRouter);
 router.use('/auth', authRouter);
+router.use('/favorites', favoritesRouter);
 
-// Middleware para rutas inexistentes (NO VA)
+// Middleware para rutas inexistentes
 router.use('*', (req, res, next) => {
   const error = new Error('404. Esa ruta no existe');
   error.status = 404;
